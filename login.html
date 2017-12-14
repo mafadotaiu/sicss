@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>SICSS | Login</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/pe-icons.css" rel="stylesheet">
+    <link href="css/prettyPhoto.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
+    <script src="js/jquery.js"></script>
+    <link rel="shortcut icon" href="images/ico/fav.png">
+
+    <script type="text/javascript">
+    jQuery(document).ready(function($){
+	'use strict';
+      	jQuery('body').backstretch([
+          "images/banner/banner1.jpg",
+	        "images/banner/banner2.jpg",
+	        "images/banner/banner3.jpg"
+	    ], {duration: 5000, fade: 500});
+    });
+    </script>
+</head><!--/head-->
+
+<body>
+    <div id="preloader"></div>
+    <section id="main-slider" class="no-margin">
+      <div class="title-container">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-6 col-xs-12">
+              <img src="images/logo/logo.png" alt="">
+            </div>
+            <div class="col-sm-6 col-xs-12">
+              <p><a href="#">Registration Guide</a> | <a href="#">中文</a> </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+        <div class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="item active">
+                  <div class="container">
+                      <div class="row">
+                          <div class="col-sm-12">
+                            <div class="login">
+                              <div class="">
+                                <div class="login-container-wrapper clearfix">
+                                  <ul class="switcher clearfix">
+                                    <li class="first logo active" data-tab="login">
+                                        <a>Login</a>
+                                    </li>
+                                    <li class="second logo" data-tab="sign_up">
+                                        <a>Sign Up</a>
+                                    </li>
+                                  </ul>
+                                  <div class="tab-content">
+                                    <div class="tab-pane active" id="login">
+                                      <form class="form-horizontal login-form" action="index.html" method="post">
+                                        <div class="form-group relative">
+                                          <input class="form-control input-lg" id="login_username" placeholder="E-mail Address" required="" type="email"> <i class="fa fa-envelope"></i>
+                                        </div>
+                                        <div class="form-group relative">
+                                          <input class="form-control input-lg" id="login_password" placeholder="Password" required="" type="password"> <i class="fa fa-lock"></i>
+                                        </div>
+                                        <div class="form-group">
+                                          <button class="btn-lg btn-block btn-btn " type="submit">Login</button>
+                                        </div>
+                                        <hr />
+                                        <div class="text-center">
+                                          <label><a href="">Forgot your password?</a></label>
+                                        </div>
+                                      </form>
+                                    </div>
+                                    <div class="tab-pane" id="sign_up">
+                                      <form class="form-horizontal login-form" action="index.html" method="post">
+                                        <div class="form-group relative">
+                                          <input class="form-control input-lg" id="login_username" placeholder="Username" required="" type="text"> <i class="fa fa-user"></i>
+                                        </div>
+                                        <div class="form-group relative">
+                                          <input class="form-control input-lg" id="login_username" placeholder="E-mail Address" required="" type="email"> <i class="fa fa-envelope"></i>
+                                        </div>
+                                        <div id="content">
+                                          <div class="form-group relative">
+                                            <input class="form-control input-lg" id="password" placeholder="Password" required="" type="password"> <i class="fa fa-lock"></i>
+                                            <div class="strength-indicator">
+                                               <div id="short" class="strength"></div>
+                                               <div id="weak" class="strength"></div>
+                                               <div id="good" class="strength"></div>
+                                               <div id="strong" class="strength"></div>
+                                               <div id="result"></div>
+
+                                            </div>
+                                          </div>
+                                       </div>
+                                        <div class="form-group relative">
+                                          <input class="form-control input-lg" placeholder="Repeat Password" required="" type="password" id="confirmpassword" onChange="isPasswordMatch();"> <i class="fa fa-lock"></i>
+                                          <div id="divCheckPassword"></div>
+
+                                        </div>
+                                        <div class="form-group">
+                                          <button id="signup" class="btn-btn btn-lg btn-block" type="submit">Sign Up</button>
+                                        </div>
+
+                                        <hr>
+                                        <div class="text-center">
+                                          <label><a href="#">Already Member?</a></label>
+                                        </div>
+                                      </form>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+
+                </div><!--/.item-->
+            </div><!--/.carousel-inner-->
+        </div><!--/.carousel-->
+        <div class="footer-login center">
+          <p>&copy; 2017 Study in China. All right reserved.</p>
+        </div>
+    </section><!--/#main-slider-->
+
+    <script type="text/javascript">
+      $(document).ready(function(){
+
+      $('ul.switcher li').click(function(){
+        var tab_id = $(this).attr('data-tab');
+
+        $('li').removeClass('active');
+        $('div.tab-pane').removeClass('active');
+
+        $(this).addClass('active');
+        $("#"+tab_id).addClass('active');
+      })
+
+      })
+    </script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('.strength-indicator').hide()
+        $('#password').keyup(function() {
+        $('#result').html(checkStrength($('#password').val()))
+        })
+        function checkStrength(password) {
+        var strength = 0
+        if (password.length < 4) {
+        // $('#result').removeClass()
+        $('#short').addClass('short')
+        $('#strong').removeClass('strong')
+        $('#weak').removeClass('weak')
+        $('#good').removeClass('good')
+        return 'Short'
+        }
+        if (password.length > 5) strength += 1
+        // If password contains both lower and uppercase characters, increase strength value.
+        if (password.match(/([a-z].*[A-Z])|([A-Z].*[a-z])/)) strength += 1
+        // If it has numbers and characters, increase strength value.
+        if (password.match(/([a-zA-Z])/) && password.match(/([0-9])/)) strength += 1
+        // If it has one special character, increase strength value.
+        if (password.match(/([!,%,&,@,#,$,^,*,?,_,~])/)) strength += 1
+        // If it has two special characters, increase strength value.
+        if (password.match(/(.*[!,%,&,@,#,$,^,*,?,_,~].*[!,%,&,@,#,$,^,*,?,_,~])/)) strength += 1
+        // Calculated strength value, we can return messages
+        // If value is less than 2
+        if (strength < 2) {
+        // $('#result').removeClass()
+        $('#weak').addClass('weak')
+        $('#short').addClass('short')
+        $('#strong').removeClass('strong')
+        $('#good').removeClass('good')
+
+        return 'Weak'
+        } else if (strength == 2) {
+        // $('#result').removeClass()
+        $('#weak').addClass('weak')
+        $('#good').addClass('good')
+        $('#strong').removeClass('strong')
+
+        return 'Good'
+        } else {
+        // $('#result').removeClass()
+        $('#strong').addClass('strong')
+        $('#weak').addClass('weak')
+        $('#good').addClass('good')
+        return 'Strong'
+        }
+        }
+        });
+
+        $( "#password" ).focus(function() {
+          $('.strength-indicator').show();
+        });
+    </script>
+    <script type="text/javascript">
+        function isPasswordMatch() {
+        var password = $("#password").val();
+        var confirmPassword = $("#confirmpassword").val();
+
+        if (password != confirmPassword){
+          $("#divCheckPassword").html("Passwords do not match!").addClass('no').removeClass('yes');
+          $("#signup").prop('disabled', true);
+
+        }
+        else {
+          $("#divCheckPassword").html("Passwords match.").addClass('yes').removeClass('no');
+          $("#signup").prop('disabled', false);
+
+        }
+      }
+
+      $(document).ready(function () {
+        $("#txtConfirmPassword").keyup(isPasswordMatch)
+      });
+    </script>
+
+
+    <script src="js/plugins.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.prettyPhoto.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCWDPCiH080dNCTYC-uprmLOn2mt2BMSUk&amp;sensor=true"></script>
+    <script src="js/init.js"></script>
+</body>
+</html>
